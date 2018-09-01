@@ -23,6 +23,10 @@ func main() {
   bytes, _ := ioutil.ReadAll(resp.Body)
   var s Sitemapindex
   xml.Unmarshal(bytes,&s)
-  fmt.Println(s.Locations)
+  //fmt.Println(s.Locations)
+
+  for _, Location := range(s.Locations){
+  	fmt.Println(Location)
+  }
   //resp.Body.Close()
 }
