@@ -4,7 +4,9 @@ import (
 "encoding/xml"
   "fmt"
   "io/ioutil"
-  "net/http")
+  "net/http"
+  "html/template"
+  )
 
 
 //slice of location of sitemaps depending on different topics from main site map
@@ -26,6 +28,22 @@ type NewsMap struct {
   Location string
 }
 
+type NewsAggPage struct{
+    Title string
+    News string
+}
+
+//index page of go web app
+
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+  fmt.Fprintf(w, "<h1>Hey, the server has started click this </h1><a href=''>Link</a><h1> for news app</h1>")
+}
+
+func newsagg(w http.ResponseWriter, r *http.Request) {
+  p := NewsAggPage{Title: "title sample", News: "Sample news"}
+  t, _ :=template.ParseFiles("news.html")
+  t.Execute(w,p)
+}
 
 
 func main() {
@@ -54,14 +72,16 @@ func main() {
 
   }
 
-  //fmt.Println("reached")
+  fmt.Println("reached")
 
-  for idx, data := range news_map {
-    fmt.Println("\n\n\n",idx)
-    fmt.Println("\n",data.Keyword)
-    fmt.Println("\n",data.Location)
-  }
+  // for idx, data := range news_map {
+  //   fmt.Println("\n\n\n",idx)
+  //   fmt.Println("\n",data.Keyword)
+  //   fmt.Println("\n",data.Location)
+  // }
 
-
+  http.HandleFunc("/", indexHandler)
+  http.HandleFunc("/news/", newsagg)
+  http.ListenAndServe(":8000", nil)
   //resp.Body.Close()
 }
