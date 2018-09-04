@@ -1,7 +1,7 @@
 package main
 
 import (
-"encoding/xml"
+  "encoding/xml"
   "fmt"
   "io/ioutil"
   "net/http"
@@ -30,7 +30,7 @@ type NewsMap struct {
 
 type NewsAggPage struct{
     Title string
-    News string
+    News map[string]NewsMap
 }
 
 //index page of go web app
