@@ -15,14 +15,11 @@
     </thead>
     <tbody>
         {{ range $key, value := .News}}
-		 <tr>
-            <td>{{ .Title}}</td>
-            <td>{{ .News}}</td>
-        </tr>
-        <tr>
-            <td>another title</td>
-            <td>the other keywords</td>
-        </tr>
+            <tr>
+                <td><a href="{{ $value.Location }}" target="_blank"></a>{{ $key }}</td>
+                <td>{{ $value.Keyword }}</td>
+            </tr>
+        {{ end }}
     </tbody>
 </table>
 </body>
