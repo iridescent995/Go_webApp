@@ -14,6 +14,7 @@
         </tr>
     </thead>
     <tbody>
+        {{ range $key, value := .News}}
 		 <tr>
             <td>{{ .Title}}</td>
             <td>{{ .News}}</td>

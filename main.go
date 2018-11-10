@@ -40,13 +40,6 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func newsagg(w http.ResponseWriter, r *http.Request) {
-  p := NewsAggPage{Title: "title sample", News: "Sample news"}
-  t, _ :=template.ParseFiles("news.html")
-  t.Execute(w,p)
-}
-
-
-func main() {
 
   var s Sitemapindex
   var n News
@@ -60,10 +53,10 @@ func main() {
   //fmt.Println(s.Locations)
 
   for _, Location := range(s.Locations){
-  	resp, _ := http.Get(Location)
-  	bytes, _ := ioutil.ReadAll(resp.Body)
-  	xml.Unmarshal(bytes,&n)
-  	//fmt.Println(n.Locations)
+    resp, _ := http.Get(Location)
+    bytes, _ := ioutil.ReadAll(resp.Body)
+    xml.Unmarshal(bytes,&n)
+    //fmt.Println(n.Locations)
 
     //storing data in a map
     for idx, _ := range n.Keywords {
@@ -72,7 +65,17 @@ func main() {
 
   }
 
-  fmt.Println("reached")
+  p := NewsAggPage{Title: "title sample", News: news_map}
+  t, _ :=template.ParseFiles("news.html")
+  t.Execute(w,p)
+}
+
+
+func main() {
+
+  
+
+  //fmt.Println("reached")
 
   // for idx, data := range news_map {
   //   fmt.Println("\n\n\n",idx)
