@@ -1,3 +1,3 @@
 # Go_webApp
-Lets develop a news aggregator web application in Golang.
+Develop a news aggregator web application in Golang.
 
